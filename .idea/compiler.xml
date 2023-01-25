@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="1.7">
+      <module name="PerficientLinks.app" target="11" />
+      <module name="PerficientLinks.buildSrc" target="11" />
+      <module name="PerficientLinks.buildSrc.main" target="11" />
+      <module name="PerficientLinks.buildSrc.test" target="11" />
+      <module name="PerficientLinks.data" target="11" />
+      <module name="PerficientLinks.data.main" target="11" />
+      <module name="PerficientLinks.data.test" target="11" />
+      <module name="PerficientLinks.framework" target="11" />
+      <module name="PerficientLinks.framework.main" target="11" />
+      <module name="PerficientLinks.framework.test" target="11" />
+      <module name="PerficientLinks.presentation" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

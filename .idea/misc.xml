@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/wkspace_dromentoring/PerficientLinks/app/src/main/res/layout/activity_main.xml" value="0.10104166666666667" />
+        <entry key="..\:/wkspace_dromentoring/PerficientLinks/app/src/main/res/layout/layout_one_kudos.xml" value="0.1983695652173913" />
+        <entry key="..\:/wkspace_dromentoring/PerficientLinks/app/src/main/res/layout/layout_two_employee_msg.xml" value="0.15760869565217392" />
+        <entry key="..\:/wkspace_dromentoring/PerficientLinks/framework/src/main/res/drawable/res.xml" value="0.156" />
+        <entry key="..\:/wkspace_dromentoring/PerficientLinks/presentation/src/main/res/layout/layout_one_kudos.xml" value="0.13496376811594202" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

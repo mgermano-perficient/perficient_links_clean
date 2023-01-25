@@ -1,0 +1,58 @@
+import dependencies.Versions
+import dependencies.Dependencies
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdk Versions.compileSdk
+
+    defaultConfig {
+        applicationId "com.perficient.links"
+        minSdk      Versions.minSdk
+        targetSdk   Versions.targetSdk
+        versionCode Versions.versionCode
+        versionName Versions.name
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation Dependencies.supportAndroidLibs
+
+    implementation project(path: ':data')
+
+    // Hilt
+    implementation Dependencies.daggerAndroid
+    implementation project(path: ':framework')
+    implementation project(path: ':presentation')
+    kapt Dependencies.hiltCompiler
+
+    // RecyclerView & CardView
+    implementation Dependencies.cardview
+    implementation Dependencies.recyclerview
+
+
+}
