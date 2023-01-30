@@ -1,5 +1,5 @@
-import dependencies.Versions
 import dependencies.Dependencies
+import dependencies.Versions
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
@@ -37,6 +37,10 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    packagingOptions {
+        exclude 'META-INF/gradle/incremental.annotation.processors'
+    }
 }
 
 dependencies {
@@ -48,6 +52,7 @@ dependencies {
     implementation Dependencies.daggerAndroid
     implementation project(path: ':framework')
     implementation project(path: ':presentation')
+    implementation project(path: ':domain')
     kapt Dependencies.hiltCompiler
 
     // RecyclerView & CardView

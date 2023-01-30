@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.perficient.data.model.ItemList
+import com.perficient.model.ItemList
 import com.perficient.presentation.databinding.LayoutOneKudosBinding
 import com.perficient.presentation.databinding.LayoutTwoEmployeeMsgBinding
 import dagger.hilt.android.qualifiers.ApplicationContext

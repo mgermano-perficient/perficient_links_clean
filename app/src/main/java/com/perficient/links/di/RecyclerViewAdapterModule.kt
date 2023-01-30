@@ -1,7 +1,7 @@
-package com.perficient.framework.di
+package com.perficient.links.di
 
-import com.perficient.data.model.ItemList
-import com.perficient.framework.R
+import com.perficient.links.R
+import com.perficient.model.ItemList
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

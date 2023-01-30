@@ -1,10 +1,8 @@
-package com.perficient.data.model
-
-import javax.inject.Inject
+package com.perficient.model
 
 // Variables to hold the attributes of the first and second layout.
 // The viewType variable specifies which out of the two layouts is expected in the given item
-data class ItemList @Inject constructor(
+data class ItemList (
     var viewType: Int,
     var icon: Int,
     var title: String,
