@@ -3,14 +3,19 @@ package com.perficient.presentation.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.perficient.model.ItemList
 import com.perficient.model.MainRecyclerViewItem
 import com.perficient.presentation.R
-import com.perficient.presentation.databinding.LayoutOneKudosBinding
-import com.perficient.presentation.databinding.LayoutTwoEmployeeMsgBinding
+import com.perficient.presentation.databinding.ItemCountryBinding
 import javax.inject.Inject
 
 class PerficientLinkViewAdapter @Inject constructor(private val list: ArrayList<MainRecyclerViewItem>) : RecyclerView.Adapter<MainRecyclerViewHolder>() {
+
+    fun updateCountries(newCountries: List<MainRecyclerViewItem.CountryItem>) {
+        list.clear()
+        list.addAll(newCountries)
+        notifyDataSetChanged()
+    }
+
 
     override fun getItemCount() = list.size
 
@@ -18,11 +23,8 @@ class PerficientLinkViewAdapter @Inject constructor(private val list: ArrayList<
         return when(viewType){
 
             // Inflate the corresponding layout item and create the associated view holder instance.
-            R.layout.layout_one_kudos -> MainRecyclerViewHolder.KudosViewHolder (
-                LayoutOneKudosBinding.inflate(LayoutInflater.from(parent.context), parent, false) )
-
-            R.layout.layout_two_employee_msg -> MainRecyclerViewHolder.EmployeeBirthdayViewHolder (
-                LayoutTwoEmployeeMsgBinding.inflate(LayoutInflater.from(parent.context), parent, false) )
+            R.layout.item_country -> MainRecyclerViewHolder.CountryViewHolder (
+                ItemCountryBinding.inflate(LayoutInflater.from(parent.context), parent, false) )
 
             else -> throw IllegalArgumentException("Invalid ViewType Provided")
         }
@@ -31,22 +33,21 @@ class PerficientLinkViewAdapter @Inject constructor(private val list: ArrayList<
 
      override fun onBindViewHolder(holder: MainRecyclerViewHolder, position: Int) {
        when(holder) {
-           is MainRecyclerViewHolder.KudosViewHolder -> holder.bind(list[position] as MainRecyclerViewItem.KudosItem)
-           is MainRecyclerViewHolder.EmployeeBirthdayViewHolder -> holder.bind(list[position] as MainRecyclerViewItem.EmployeeBirthdayItem)
+           is MainRecyclerViewHolder.CountryViewHolder -> holder.bind(list[position] as MainRecyclerViewItem.CountryItem)
        }
    }
 
     override fun getItemViewType(position: Int): Int {
         return when(list[position]){
-            is MainRecyclerViewItem.KudosItem -> R.layout.layout_one_kudos
-            is MainRecyclerViewItem.EmployeeBirthdayItem -> R.layout.layout_two_employee_msg
+            is MainRecyclerViewItem.CountryItem -> R.layout.item_country
         }
     }
 
     object DataSourceForViewAdapter {
         fun getDataSourceForViewAdapter(): ArrayList<MainRecyclerViewItem> {
             val dataList = ArrayList<MainRecyclerViewItem>()
-            dataList.add(MainRecyclerViewItem.EmployeeBirthdayItem(ItemList.Layout_Two_Employee, R.drawable.cake48, "Juan Targarna", "Muy Feliz Cumpleaños Juan"))
+
+           /* dataList.add(MainRecyclerViewItem.EmployeeBirthdayItem(ItemList.Layout_Two_Employee, R.drawable.cake48, "Juan Targarna", "Muy Feliz Cumpleaños Juan"))
             dataList.add(MainRecyclerViewItem.KudosItem(ItemList.Layout_One_Kudos, R.drawable.congrats,  "Kudos de Disney", "Pedro, has hecho un gran trabajo"))
             dataList.add(MainRecyclerViewItem.EmployeeBirthdayItem(ItemList.Layout_Two_Employee, R.drawable.cake48, "Romina Romaniuk", "Muy Feliz Cumpleaños Romina"))
             dataList.add(MainRecyclerViewItem.KudosItem(ItemList.Layout_One_Kudos, R.drawable.congrats,  "Kudos de Canadian Toys", "Tania, 10 años en el empresa"))
@@ -55,6 +56,7 @@ class PerficientLinkViewAdapter @Inject constructor(private val list: ArrayList<
             dataList.add(MainRecyclerViewItem.KudosItem(ItemList.Layout_One_Kudos, R.drawable.cake48,    "Carlos Garcia", "Que pases un lindo dia"))
             dataList.add(MainRecyclerViewItem.KudosItem(ItemList.Layout_One_Kudos, R.drawable.cake48,    "Marcela Clay", "Felicidades, lo mejor para vos en este dia"))
             dataList.add(MainRecyclerViewItem.KudosItem(ItemList.Layout_One_Kudos, R.drawable.cake48,    "Carlos Dio", "Te deseamos que tengas un gran dia"))
+           */
             return dataList
         }
     }

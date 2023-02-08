@@ -49,4 +49,6 @@ dependencies {
 
     implementation("com.google.dagger:hilt-android:2.40.5")
     implementation("com.google.dagger:hilt-compiler:2.40.5")
+
+    implementation ("com.github.bumptech.glide:glide:4.10.0")
 }

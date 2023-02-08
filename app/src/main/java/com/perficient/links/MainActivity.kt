@@ -1,8 +1,12 @@
 package com.perficient.links
 
+import androidx.lifecycle.Observer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.perficient.framework.viewmodel.ListViewModel
 import com.perficient.links.databinding.ActivityMainBinding
 import com.perficient.presentation.view.PerficientLinkViewAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -10,6 +14,8 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    private val viewModel: ListViewModel by viewModels()
 
     // view binding for the activity
     private var _binding : ActivityMainBinding? = null
@@ -27,10 +33,37 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.recyclerView.apply {
+        viewModel.refresh()
+
+        binding.countriesList.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = recyclerViewAdapter
         }
+
+        observeViewModel()
+    }
+
+    fun observeViewModel() {
+        viewModel.countries.observe(this, Observer { countries ->
+            countries?.let {
+                binding.countriesList.visibility = View.VISIBLE
+                recyclerViewAdapter.updateCountries(it)
+            }
+        })
+
+       viewModel.countryLoadError.observe(this, Observer { isError ->
+           binding.listError.visibility = if (isError == null) View.GONE else View.VISIBLE
+        })
+
+        viewModel.loading.observe(this, Observer { isLoading ->
+            isLoading?.let {
+                binding.loadingView.visibility = if (it) View.VISIBLE else View.GONE
+                if (it) {
+                    binding.listError.visibility = View.GONE
+                    binding.countriesList.visibility = View.GONE
+                }
+            }
+        })
     }
 
 }
