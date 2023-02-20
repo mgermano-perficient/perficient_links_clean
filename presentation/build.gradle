@@ -1,0 +1,65 @@
+import dependencies.Dependencies
+
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdk = 32
+
+    defaultConfig {
+        minSdk = 21
+        targetSdk = 32
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
+    }
+
+    buildTypes {
+        release {
+           // isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+}
+
+dependencies {
+
+    implementation project(path: ':data')
+    implementation project(path: ':domain')
+
+    // The Support Android Libraries
+    implementation Dependencies.androidxCoreKtx
+    implementation Dependencies.androidxAppCompat
+    implementation Dependencies.googleAndroidMaterial
+
+    // Testing
+    testImplementation Dependencies.junit
+    androidTestImplementation  Dependencies.androidxTestExt
+    androidTestImplementation  Dependencies.androidxTestExpressoCore
+
+    // Hilt
+    implementation Dependencies.daggerHiltAndroid
+    kapt Dependencies.daggerHiltCompiler
+
+    // Glide
+    implementation Dependencies.glide
+
+}

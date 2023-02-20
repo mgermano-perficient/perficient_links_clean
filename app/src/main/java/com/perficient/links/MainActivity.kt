@@ -35,23 +35,30 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.refresh()
 
-        binding.countriesList.apply {
+        //recyclerViewAdapter = PerficientLinkViewAdapter(ArrayList<MainRecyclerViewItem>())
+        binding.rvList .apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = recyclerViewAdapter
         }
-
         observeViewModel()
     }
 
     fun observeViewModel() {
         viewModel.countries.observe(this, Observer { countries ->
             countries?.let {
-                binding.countriesList.visibility = View.VISIBLE
+                binding.rvList.visibility = View.VISIBLE
                 recyclerViewAdapter.updateCountries(it)
             }
         })
 
-       viewModel.countryLoadError.observe(this, Observer { isError ->
+        viewModel.shortnews.observe(this, Observer { news ->
+            news?.let {
+                binding.rvList.visibility = View.VISIBLE
+                recyclerViewAdapter.updateNews(it)
+            }
+        })
+
+       viewModel.loadError.observe(this, Observer { isError ->
            binding.listError.visibility = if (isError == null) View.GONE else View.VISIBLE
         })
 
@@ -60,7 +67,7 @@ class MainActivity : AppCompatActivity() {
                 binding.loadingView.visibility = if (it) View.VISIBLE else View.GONE
                 if (it) {
                     binding.listError.visibility = View.GONE
-                    binding.countriesList.visibility = View.GONE
+                    binding.rvList.visibility = View.GONE
                 }
             }
         })

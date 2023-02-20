@@ -5,6 +5,7 @@ import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import com.perficient.model.MainRecyclerViewItem
 import com.perficient.presentation.databinding.ItemCountryBinding
+import com.perficient.presentation.databinding.ItemInshortNewsBinding
 
 // SEALED VIEW HOLDERS
 sealed class MainRecyclerViewHolder(binding: ViewBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -15,6 +16,16 @@ sealed class MainRecyclerViewHolder(binding: ViewBinding) : RecyclerView.ViewHol
                 Glide.with(countryFlag.context).load(countryItem.flag).into(countryFlag)
                 countryName.text = countryItem.countryName
                 countryCapitalCity.text = countryItem.capitalCity
+            }
+        }
+    }
+
+    class InshortNewsViewHolder(private val itemInshortNewsBinding: ItemInshortNewsBinding) : MainRecyclerViewHolder(itemInshortNewsBinding){
+        fun bind(inshortNewsItem: MainRecyclerViewItem.InshortNewsItem){
+            itemInshortNewsBinding.apply{
+                headline.text = inshortNewsItem.headline
+                author.text = inshortNewsItem.user
+                content.text = inshortNewsItem.latinTxt
             }
         }
     }

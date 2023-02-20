@@ -1,5 +1,6 @@
 import dependencies.Dependencies
 import dependencies.Versions
+
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
@@ -27,8 +28,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -44,30 +45,42 @@ android {
 }
 
 dependencies {
-    implementation Dependencies.supportAndroidLibs
 
+    // Modules dependencies & visibility
     implementation project(path: ':data')
-
-    // Hilt
-    implementation Dependencies.daggerAndroid
     implementation project(path: ':framework')
     implementation project(path: ':presentation')
     implementation project(path: ':domain')
-    kapt Dependencies.hiltCompiler
+
+    // The Support Android Libraries
+    implementation Dependencies.androidxCoreKtx
+    implementation Dependencies.androidxAppCompat
+    implementation Dependencies.androidxActivityKtx
+    implementation Dependencies.googleAndroidMaterial
+    implementation Dependencies.androidxConstraintlayout
+
+    // Hilt
+    implementation Dependencies.daggerHiltAndroid
+    kapt Dependencies.daggerHiltCompiler
 
     // RecyclerView & CardView
     implementation Dependencies.cardview
     implementation Dependencies.recyclerview
 
-
     // LifeCycle
-    //implementation 'android.arch.lifecycle:extensions:1.1.1'
-    implementation 'androidx.fragment:fragment-ktx:1.3.6'
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation Dependencies.androidxLifecycleViewModelKtx
+    implementation Dependencies.androidxLifecycleRuntimeKtx
+
+    // Livedata
+    implementation Dependencies.androidxLifecycleLivedataKtx
 
     // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.0'
+    implementation Dependencies.coroutinesCore
+    implementation Dependencies.coroutinesAndroid
 
-   
+    // Retrofit
+    implementation Dependencies.retrofit2
+    implementation Dependencies.retrofit2ConverterGson
+
 }
+
