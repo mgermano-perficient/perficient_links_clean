@@ -8,7 +8,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -19,7 +18,7 @@ class InshortNewsApiModule {
 
     @Singleton
     @Provides
-    @Named("NewsService")
+    @InshortNews
     fun provideRetrofitNewsService(): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
@@ -27,7 +26,7 @@ class InshortNewsApiModule {
 
     @Singleton
     @Provides
-    fun provideInshortNewApi( @Named("NewsService")retrofit: Retrofit): InshortNewApi =
+    fun provideInshortNewApi(@InshortNews retrofit: Retrofit): InshortNewApi =
         retrofit.create(InshortNewApi::class.java)
 
     @Singleton

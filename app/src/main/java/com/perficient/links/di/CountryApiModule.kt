@@ -8,7 +8,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -19,7 +18,7 @@ class CountryApiModule {
 
     @Singleton
     @Provides
-    @Named("CountryService")
+    @Countries
     fun provideRetrofitCountriesService(): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
@@ -27,7 +26,7 @@ class CountryApiModule {
 
     @Singleton
     @Provides
-    fun provideCountryApi( @Named("CountryService")retrofit: Retrofit): CountryApi =
+    fun provideCountryApi(@Countries retrofit: Retrofit): CountryApi =
         retrofit.create(CountryApi::class.java)
 
     @Singleton
