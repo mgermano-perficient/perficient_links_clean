@@ -38,15 +38,6 @@ object Dependencies {
     const val daggerHiltAndroid                 = "com.google.dagger:hilt-android:${Versions.DroLibraries.daggerHiltAndroid}"
     const val daggerHiltCompiler                = "com.google.dagger:hilt-android-compiler:${Versions.DroLibraries.daggerHiltCompiler}"   // kapt
 
-    // const val dagger                            = "com.google.dagger:dagger:${Versions.DroLibraries.dagger}"
-    // const val daggerCompiler                    = "com.google.dagger:dagger-compiler:${Versions.DroLibraries.daggerCompiler}"             // kapt
-
-    //const val daggerHiltCompiler                = "com.google.dagger:hilt-compiler:${Versions.DroLibraries.hiltCompiler}"   // kapt
-
-    //const val androidxHiltCompiler              = "androidx.hilt:hilt-compiler:${Versions.DroLibraries.androidxHiltCompiler}" // kapt
-    //const val androidxHiltLifecycleViewModel    = "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.DroLibraries.androidxHiltLifecycleViewModel}"
-
-
     // Glide
     const val glide = "com.github.bumptech.glide:glide:${Versions.DroLibraries.glide}"
 

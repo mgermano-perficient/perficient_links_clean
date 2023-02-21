@@ -8,14 +8,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
-
 @HiltViewModel
-class ListViewModel @Inject constructor(): ViewModel() {
-
-/*
-@HiltViewModel
-class ListViewModel @Inject constructor(private val countryService: CountryService): ViewModel() {
-*/
+class ListViewModel @Inject constructor(private val countryService: CountryService, private val inshortNewService: InshortNewService): ViewModel() {
 
     val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
         onError("Exception: ${throwable.localizedMessage}")
@@ -34,38 +28,12 @@ class ListViewModel @Inject constructor(private val countryService: CountryServi
         loading.value = true
 
         viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
-            val response = CountryService.getCountriesService().getCountries()
-            withContext(Dispatchers.Main) {
-                if(response.isSuccessful) {
-                    countries.value = response.body()
-                    loadError.value = null
-                    loading.value = false
-                } else {
-                    onError("Error: ${response.message()}")
-                }
-            }
-        }
-
-        viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
-            val response = InshortNewService.getShortNewsService().getNews()
-            withContext(Dispatchers.Main) {
-                if(response.isSuccessful) {
-                    shortnews.value = response.body()
-                    loadError.value = null
-                    loading.value = false
-                } else {
-                    onError("Error: ${response.message()}")
-                }
-            }
-        }
-
-        /*viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
             try {
                 // coroutineScope is needed, else in case of any network error, it will crash
                 coroutineScope {
                     //val countryDeferredResponse  = async { CountryService.getCountriesService().getCountries() }
                     val countryDeferredResponse  = async {countryService.getCountries()}
-                    val shortDeferredNewResponse = async {InshortNewService.getShortNewsService().getNews() }
+                    val shortDeferredNewResponse = async {inshortNewService.getNews()}
 
                     val countryResponse = countryDeferredResponse.await()
                     val shortNewResponse = shortDeferredNewResponse.await()
@@ -87,7 +55,7 @@ class ListViewModel @Inject constructor(private val countryService: CountryServi
             catch (e: Exception) {
                 onError("Error: Something Went Wrong ${e.message}")
             }
-        }*/
+        }
     }
 
     private fun onError(message: String) {

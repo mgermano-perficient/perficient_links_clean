@@ -6,7 +6,6 @@ import retrofit2.http.GET
 
 interface InshortNewApi {
 
-    //@GET("news?category=science")
     @GET("posts")
     suspend fun getNews(): Response<List<MainRecyclerViewItem.InshortNewsItem>>
 }

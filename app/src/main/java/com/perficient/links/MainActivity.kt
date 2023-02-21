@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.refresh()
 
-        //recyclerViewAdapter = PerficientLinkViewAdapter(ArrayList<MainRecyclerViewItem>())
         binding.rvList .apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = recyclerViewAdapter
