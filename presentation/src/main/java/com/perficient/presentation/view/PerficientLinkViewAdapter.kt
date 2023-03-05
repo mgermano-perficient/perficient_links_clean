@@ -12,7 +12,6 @@ import javax.inject.Inject
 class PerficientLinkViewAdapter @Inject constructor(private val list: ArrayList<MainRecyclerViewItem>) : RecyclerView.Adapter<MainRecyclerViewHolder>() {
 
     fun updateCountries(newCountries: List<MainRecyclerViewItem.CountryItem>) {
-        list.clear()
         list.addAll(newCountries)
         notifyDataSetChanged()
     }
@@ -21,6 +20,7 @@ class PerficientLinkViewAdapter @Inject constructor(private val list: ArrayList<
         list.addAll(newShortNews)
         notifyDataSetChanged()
     }
+
 
     override fun getItemCount() = list.size
 
@@ -50,7 +50,7 @@ class PerficientLinkViewAdapter @Inject constructor(private val list: ArrayList<
         return when(list[position]){
             is MainRecyclerViewItem.CountryItem -> R.layout.item_country
             is MainRecyclerViewItem.InshortNewsItem -> R.layout.item_inshort_news
-            //else -> throw IllegalArgumentException("Invalid getItemViewType Provided")
+            else -> throw IllegalArgumentException("Invalid getItemViewType Provided")
         }
     }
 }
