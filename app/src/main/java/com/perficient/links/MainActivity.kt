@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.perficient.framework.viewmodel.ListViewModel
 import com.perficient.links.databinding.ActivityMainBinding
+import com.perficient.model.CountriesNewsState
 import com.perficient.model.CountryState
 import com.perficient.model.NewsState
 import com.perficient.presentation.view.PerficientLinkViewAdapter
@@ -44,9 +45,36 @@ class MainActivity : AppCompatActivity() {
             adapter = recyclerViewAdapter
         }
 
-        lifecycleScope.launchWhenStarted  {
+         lifecycleScope.launchWhenStarted {
+            viewModel._countriesNewsStateFlow.collect { it ->
+                when (it) {
+                    is CountriesNewsState.Loading -> {
+                        binding.rvList.isVisible = false
+                        binding.loadingView.isVisible = true
+                    }
+                    is CountriesNewsState.Failure -> {
+                        binding.rvList.isVisible = false
+                        binding.loadingView.isVisible = false
+                        Log.d("main", "onCreate: ${it.msg}")
+                    }
+                    is CountriesNewsState.Success -> {
+                        binding.rvList.isVisible = true
+                        binding.loadingView.isVisible = false
+                        recyclerViewAdapter.updateCountriesNews(it.data)
+                        recyclerViewAdapter.notifyDataSetChanged()
+                    }
+                    is CountriesNewsState.Empty -> {
 
-            viewModel._countriesStateFlow.collect { it ->
+                    }
+                }
+            }
+        }
+
+
+
+        /*lifecycleScope.launchWhenStarted  {
+
+           *//* viewModel._countriesStateFlow.collect { it ->
                 when (it) {
                     is CountryState.Loading -> {
                         binding.rvList.isVisible = false
@@ -67,10 +95,10 @@ class MainActivity : AppCompatActivity() {
 
                     }
                 }
-            }
-        }
+            }*//*
+        }*/
 
-        lifecycleScope.launchWhenStarted {
+       /* lifecycleScope.launchWhenStarted {
             viewModel._newsStateFlow.collect { it ->
                 when (it) {
                     is NewsState.Loading -> {
@@ -93,6 +121,6 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-        }
+        }*/
     }
 }

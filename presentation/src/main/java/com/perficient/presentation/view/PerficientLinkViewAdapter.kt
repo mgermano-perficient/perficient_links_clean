@@ -21,6 +21,11 @@ class PerficientLinkViewAdapter @Inject constructor(private val list: ArrayList<
         notifyDataSetChanged()
     }
 
+    fun updateCountriesNews(newCountriesNews: List<MainRecyclerViewItem>) {
+        list.addAll(newCountriesNews)
+        notifyDataSetChanged()
+    }
+
 
     override fun getItemCount() = list.size
 
